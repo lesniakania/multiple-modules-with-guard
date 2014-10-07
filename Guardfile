@@ -10,7 +10,7 @@
 #  * zeus: 'zeus rspec' (requires the server to be started separetly)
 #  * 'just' rspec: 'rspec'
 guard :rspec,
-  watchdir: ['.', './moduleA'],
+  watchdirs: ['.', './moduleA'],
   cmd: 'bundle exec spring rspec',
   failed_mode: :keep,
   spec_paths: ['spec'] do
