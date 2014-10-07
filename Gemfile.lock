@@ -1,6 +1,6 @@
 GIT
   remote: git@github.com:lesniakania/guard-rspec.git
-  revision: 4e6ebe4503614b36573453a9bb7174a6f6190bee
+  revision: ce0be4341efac665ffade5beddb1a027109c27f4
   specs:
     guard-rspec (4.3.2)
       guard (>= 2.6.2)
