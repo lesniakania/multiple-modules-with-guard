@@ -26,8 +26,8 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 group :development do
   gem 'spring'
   gem 'spring-commands-rspec'
-  gem 'guard'
-  gem 'guard-rspec'
+  gem 'guard', git: 'git@github.com:lesniakania/guard.git', require: false
+  gem 'guard-rspec', git: 'git@github.com:lesniakania/guard-rspec.git', require: false
   gem 'guard-jasmine'
   gem 'jasmine-rails'
   gem 'jasmine-core', '< 2.0'

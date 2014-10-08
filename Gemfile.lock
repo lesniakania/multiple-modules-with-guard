@@ -1,3 +1,22 @@
+GIT
+  remote: git@github.com:lesniakania/guard-rspec.git
+  revision: aeebae3de3af93261b8e3b8207bf3f0de2f31e43
+  specs:
+    guard-rspec (4.3.1)
+      guard (~> 2.1)
+      rspec (>= 2.14, < 4.0)
+
+GIT
+  remote: git@github.com:lesniakania/guard.git
+  revision: e2d7439ae25b8b5c7eafd8cfc8afe0b606826ccf
+  specs:
+    guard (2.6.1)
+      formatador (>= 0.2.4)
+      listen (~> 2.7)
+      lumberjack (~> 1.0)
+      pry (>= 0.9.12)
+      thor (>= 0.18.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -46,21 +65,12 @@ GEM
     execjs (2.2.1)
     ffi (1.9.5)
     formatador (0.2.5)
-    guard (2.6.1)
-      formatador (>= 0.2.4)
-      listen (~> 2.7)
-      lumberjack (~> 1.0)
-      pry (>= 0.9.12)
-      thor (>= 0.18.1)
     guard-jasmine (1.19.2)
       childprocess
       guard (>= 2.0.0)
       multi_json
       thor
       tilt
-    guard-rspec (4.3.1)
-      guard (~> 2.1)
-      rspec (>= 2.14, < 4.0)
     hike (1.2.3)
     hitimes (1.2.2)
     i18n (0.6.11)
@@ -178,9 +188,9 @@ PLATFORMS
 
 DEPENDENCIES
   coffee-rails (~> 4.0.0)
-  guard
+  guard!
   guard-jasmine
-  guard-rspec
+  guard-rspec!
   jasmine-core (< 2.0)
   jasmine-rails
   jbuilder (~> 2.0)
