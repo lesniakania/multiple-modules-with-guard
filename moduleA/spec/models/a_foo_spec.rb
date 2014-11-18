@@ -3,6 +3,6 @@ require './models/a_foo'
 
 describe AFoo do
   it "is true for a AFoo" do
-    expect(true).to be false
+    expect(true).to be true
   end
 end
