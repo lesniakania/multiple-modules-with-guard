@@ -94,23 +94,48 @@ describe AFoo do
 end
 ```
 
-
-I've added the line to monitor it's `.rb` files:
+#### Using `chdir` guard option in the Guardfile
 
 ```ruby
-watch(%r{^(.+)\.rb$}) { |m| "spec/#{m[1]}_spec.rb" }
+[['.', ''], ['moduleA', 'moduleA/']].each do |dir, prefix|
+  guard :rspec,
+  chdir: dir,
+  cmd: "cd #{dir} &amp;&amp; bundle exec spring rspec" do
+
+  watch(%r{^#{prefix}(.+)\.rb$})
+  watch(%r{^#{prefix}lib/(.+)\.rb$}) { |m| "spec/lib/#{m[1]}_spec.rb" }
+  watch("#{prefix}spec/spec_helper.rb") { "spec" }
+
+  # Rails example
+  watch(%r{^#{prefix}app/(.+)\.rb$}) { |m| "spec/#{m[1]}_spec.rb" }
+  watch(%r{^#{prefix}(.+)\.rb$}) { |m| "spec/#{m[1]}_spec.rb" }
+  watch(%r{^#{prefix}app/(.*)(\.erb|\.haml|\.slim)$}) { |m| "spec/#{m[1]}#{m[2]}_spec.rb" }
+  watch(%r{^#{prefix}app/controllers/(.+)_(controller)\.rb$}) { |m| ["spec/routing/#{m[1]}_routing_spec.rb", "spec/#{m[2]}s/#{m[1]}_#{m[2]}_spec.rb", "spec/acceptance/#{m[1]}_spec.rb"] }
+  watch(%r{^#{prefix}spec/support/(.+)\.rb$}) { "spec" }
+  watch("#{prefix}config/routes.rb") { "spec/routing" }
+  watch("#{prefix}app/controllers/application_controller.rb") { "spec/controllers" }
+  watch("#{prefix}spec/rails_helper.rb") { "spec" }
+
+  # Capybara features specs
+  watch(%r{^#{prefix}app/views/(.+)/.*\.(erb|haml|slim)$}) { |m| "spec/features/#{m[1]}_spec.rb" }
+
+  # Turnip features and steps
+  watch(%r{^#{prefix}spec/acceptance/(.+)\.feature$})
+  watch(%r{^#{prefix}spec/acceptance/steps/(.+)_steps\.rb$}) { |m| Dir[File.join("**/#{m[1]}.feature")][0] || 'spec/acceptance' }
+end
 ```
 
-And I've run guard with `watchdir` option (`-w`) hoping that it will work (run tests for `AFoo` after saving model or test file):
+There are 4 important things there:
+- `chdir` option passed to `guard` method
+- change in `cmd` - `guard` needs to change directory to execute your tests in `moduleA`
+- `prefix` needs to be added to every pattern
+- everything is done in the loop for every test suite
 
-`bundle exec guard start -w . ./moduleA/`
-
-But it won't, so I made some changes to `guard` and `guard-rspec` repos.
-So when you include my forks in the `Gemfile`:
+New option is not released yet, so for now you need to use `guard` gems from the Github repo.
 
 ```ruby
- gem 'guard', git: 'git@github.com:lesniakania/guard.git', require: false
- gem 'guard-rspec', git: 'git@github.com:lesniakania/guard-rspec.git', require: false
+gem 'guard', git: 'git@github.com:guard/guard.git'
+gem 'guard-rspec', git: 'git@github.com:guard/guard-rspec.git'
 ```
 
 And add configuration required for `spring` in `moduleA/config/spring.rb`:
