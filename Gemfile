@@ -26,8 +26,8 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 group :development do
   gem 'spring'
   gem 'spring-commands-rspec'
-  gem 'guard', git: 'git@github.com:lesniakania/guard.git', require: false
-  gem 'guard-rspec', git: 'git@github.com:lesniakania/guard-rspec.git', require: false
+  gem 'guard', git: 'git@github.com:guard/guard.git'
+  gem 'guard-rspec', git: 'git@github.com:guard/guard-rspec.git'
   gem 'guard-jasmine'
   gem 'jasmine-rails'
   gem 'jasmine-core', '< 2.0'
@@ -36,4 +36,7 @@ end
 group :test, :development do
   gem 'rspec-rails'
 end
+
+gem 'rack-mini-profiler'
+
 
