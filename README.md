@@ -100,7 +100,7 @@ end
 [['.', ''], ['moduleA', 'moduleA/']].each do |dir, prefix|
   guard :rspec,
   chdir: dir,
-  cmd: "cd #{dir} &amp;&amp; bundle exec spring rspec" do
+  cmd: "cd #{dir} && bundle exec spring rspec" do
 
   watch(%r{^#{prefix}(.+)\.rb$})
   watch(%r{^#{prefix}lib/(.+)\.rb$}) { |m| "spec/lib/#{m[1]}_spec.rb" }
